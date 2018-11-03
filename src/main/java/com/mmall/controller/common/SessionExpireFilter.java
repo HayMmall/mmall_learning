@@ -17,7 +17,7 @@ public class SessionExpireFilter implements Filter {
 
     }
 
-    @Override
+    @Override //重置sessionId有效期
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest httpServletRequest = (HttpServletRequest) servletRequest;
         String loginToken = CookieUtil.readLoginToken(httpServletRequest);
