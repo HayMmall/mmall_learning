@@ -7,6 +7,7 @@ import com.mmall.service.IUserService;
 import com.mmall.util.CookieUtil;
 import com.mmall.util.JsonUtil;
 import com.mmall.util.RedisPoolUtil;
+import com.mmall.util.RedisShardedPoolUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -34,7 +35,7 @@ public class UserManageController {
             if (user.getRole() == Const.Role.ROLE_ADMIN) {
 //                session.setAttribute(Const.CURRENT_USER, user);
                 CookieUtil.writeLoginToken(httpServletResponse, session.getId());
-                RedisPoolUtil.set(session.getId(), JsonUtil.obj2String(user));
+                RedisShardedPoolUtil.set(session.getId(), JsonUtil.obj2String(user));
                 return response;
             } else {
                 return ServerResponse.createByErrorMessage("不是管理员,无法登录");
